@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sentiment Analysis</title>
+    <style>
+        body {
+            background: linear-gradient(to right, #00c6ff, #0072ff);
+            font-family: Arial, sans-serif;
+            text-align: center;
+            color: white;
+        }
+        .container {
+            margin-top: 100px;
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 30px;
+            border-radius: 10px;
+            display: inline-block;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+        }
+        textarea {
+            width: 400px;
+            height: 100px;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            font-size: 16px;
+            border: none;
+            background-color: #282828;
+            color: white;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #0072ff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            color: white;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .result {
+            margin-top: 30px;
+            font-size: 18px;
+            padding: 10px;
+            border-radius: 5px;
+            display: inline-block;
+        }
+        .positive { background-color: #28a745; }
+        .neutral { background-color: #ffc107; }
+        .negative { background-color: #dc3545; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Sentiment Analysis</h1>
+    <form method="POST">
+        <textarea name="review" placeholder="Enter your review here..." required></textarea><br><br>
+        <button type="submit">Analyze Sentiment</button>
+    </form>
+
+    {% if sentiment %}
+        <div class="result positive">
+            Positive: {{ sentiment['roberta_pos'] * 100 | round(2) }}%
+        </div>
+        <div class="result neutral">
+            Neutral: {{ sentiment['roberta_neu'] * 100 | round(2) }}%
+        </div>
+        <div class="result negative">
+            Negative: {{ sentiment['roberta_neg'] * 100 | round(2) }}%
+        </div>
+    {% endif %}
+</div>
+
+</body>
+</html>
+
